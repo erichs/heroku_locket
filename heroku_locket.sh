@@ -7,12 +7,13 @@ _heroku_app() {
 
 RPROMPT='$(_heroku_app)'
 
-# call applock() to lock-in your app selection, supports tab completion 
+# call applock() to lock-in your app selection, supports tab completion
 applock() {
-  local list
+  local list app
+  app=${1:-xYz}
   list="$(heroku apps)"
-  if $(echo $list | grep -q $1); then
-    export HEROKU_APP=$1
+  if $(echo $list | grep -q $app); then
+    export HEROKU_APP=$app
   else
     echo "You must choose from one of the following apps:"
     echo $list
