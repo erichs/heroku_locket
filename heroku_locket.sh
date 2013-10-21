@@ -1,5 +1,5 @@
 # heroku_locket.sh - lock in app selection for your heroku commands
-# v0.1, erichs
+# v0.1.1, erichs
 
 _heroku_app() {
   [ -n "$HEROKU_APP" ] && echo "%{%F{magenta}%}heroku: %{%F{blue}%}${HEROKU_APP}%{%f%}"
