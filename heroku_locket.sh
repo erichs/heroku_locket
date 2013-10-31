@@ -5,8 +5,6 @@ _heroku_app() {
   [ -n "$HEROKU_APP" ] && echo "%{%F{magenta}%}heroku: %{%F{blue}%}${HEROKU_APP}%{%f%}"
 }
 
-RPROMPT='$(_heroku_app)'
-
 # call applock() to lock-in your app selection, supports tab completion
 applock() {
   local list app
@@ -18,6 +16,9 @@ applock() {
     echo "You must choose from one of the following apps:"
     echo $list
   fi
+
+  OLD_RPROMPT=$RPROMPT
+  RPROMPT='$(_heroku_app)'
 }
 
 _applock_complete() {
@@ -31,6 +32,7 @@ compctl -K _applock_complete applock
 # call appunlock() to remove your selection
 appunlock() {
   unset HEROKU_APP
+  RPROMPT=$OLD_RPROMPT
 }
 
 heroku() {
